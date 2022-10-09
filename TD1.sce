@@ -1,31 +1,32 @@
-function y = myf(x)
-    y = (exp(x)) ./ ((cos(x)).^3 + (sin (x)).^3)
+function  y = piecewise3(x) 
+
+// first piece - a constant
+y(find(x <= -4)) = -1; 
+
+// second piece - a straight line
+x2 = x(-4 < x & x <= -3);
+y(find(-4 < x & x <= -3)) = -4*x2 - 13; 
+
+// third piece - a parabola
+x3 = x(-3 < x & x <= 0);
+y(find(-3 < x & x <= 0)) = x3.^2 + 6*x3 + 8; 
+
+// fourth piece - another constant
+y(find(0 < x)) = 8; 
+
 endfunction
 
-//x = linspace(-%pi./4+0.1,%pi./2,200)
-//plot(x,myf(x))
 
-function y = fp_cs(x,h)
-    y = imag(myf(x+h.*%i))./h
-endfunction
+// define your independent values in a column row
+x = [-7 : .1 : 7]'; 
 
-function y=fp_d(x,h)
-    y = (myf(x+h) - myf(x-h))./(2*h)
-endfunction
+// call your previously defined function
+y = piecewise3(x); 
 
-x = %pi./4
-h = 10.^(-(1:17))
+// plot
+plot(x, y, 'r')
+xlabel('x'); ylabel('y');
+title('Piecewise Function');
+legend('4-piece Function');
 
-y1 = fp_cs(x,h)
-y2 = fp_d(x,h)
-
-//plot("ll",h,y1)
-
-f=sqrt(2).*exp(x)
-
-e1=abs(f - fp_cs(x,h))
-e2=abs(f - fp_d(x,h))
-
-plot2d("ll",h,e1)
-plot2d("ll",h,e2)
-
+ 

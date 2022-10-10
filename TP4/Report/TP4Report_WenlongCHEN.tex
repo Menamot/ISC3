@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{bm, mathrsfs}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{float}
+\graphicspath{ {./images/} }
+\newtheorem{remark}{Remarque}
+\newcommand{\bx}{\bm{x}}
+
+\title{ISC3, Fall 2022 (A22) \\
+ Computer works report TP 4, 10/10/2022}
+\author{Wenlong CHEN}
+\date{October 11, 2022}
+
+\begin{document}
+    \maketitle
+    \section*{Exercise 1: Cell proliferation model}
+    Consider the scalar differential model of cell proliferation\\
+    \[\frac{dn(t)}{d(t)}=\betan(t)(n^\infty-n(t))\]
+    Take : $n(0)=10, \beta=10^{-6},t\in[0,20],n^\infty=10^6$.Solve the differential problem using the Scilab function ode(). Compare the numerical result with the exact analytical solution\\
+    \[n(t)=\frac{n_0n^\infty exp(\beta n^\infty t)}{n^\infty-n_0+n_0exp(\beta n^\infty t)} \quad \exists t\ge 0\]
+    plot the numerical solution and the exact solution on the same graphics). Plot also $t\rightarrow log_{10}(n(t))$ (both numerical and exact solutions.\\
+    ~\\
+    Solution : 
+
+
+    ~\\
+    Code pour cette question :
+    \begin{verbatim}
+        function ndot=f(t,n)
+            ndot = 10^(-6) * n * (10^6 - n)
+        endfunction
+
+        n0=10;t0=0;B=10^(-6);n_infini=10^6
+        t=0:0.1:20
+
+        n=ode(n0,t0,t,f)
+        plot2d("nl",t,n,style=2)
+
+        function n_real=f_real(t)
+            n_real=(n0.*n_infini.*exp(B.*n_infini.*t))./(n_infini-n0+n0.*exp(B.*n_infini.*t))
+        endfunction
+
+        plot2d("nl",t,f_real(t),style=5)
+        legend("numerical","exact")
+    \end{verbatim}
+    
+    
+    \section*{Exercise 2: Duffing equation.}
+    The Duffing differential equation
+    \[\ddot{x}+\beta \dot{x}-x+\gamma x^3=Fcos(\omega t)\]
+    can be written as a system of first-order differential equations as
+    $$
+    \begin{align*}
+        \dot{x}&=v,\\
+        \dot{v}&=-beta v+x-\gammax^3+Fcos(\omega t)
+    \end{align*}
+    $$
+\end{document}

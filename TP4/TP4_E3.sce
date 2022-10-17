@@ -2,14 +2,23 @@ clc,clear
 function E3=F3(t,N)
     S=N(1);E=N(2);I=N(3);R=N(4)
     NN=S+E+I+R
-    E3(1)=-(Beta.*S.*I)./(NN) + varepsilon.*R.*(1-R./NN)
-    E3(2)= (Beta.*S.*I)./(NN) - sigma.*E
+    E3(1)=-(Beta.*S.*I)./(NN)+ varepsilon.*R.*(1-R./NN)
+    E3(2)= (Beta.*S.*I)./(NN) - sigma.*E 
+    E3(3)= sigma.*E - Gamma.*I
+    E3(4)= Gamma.*I - varepsilon.*R.*(1-R./NN)
+endfunction
+
+function E3_2=F3_2(t,N)
+    S=N(1);E=N(2);I=N(3);R=N(4)
+    NN=S+E+I+R
+    E3(1)=-(Beta.*S.*I)./(NN) +(-Beta2*E*S./NN)+ varepsilon.*R.*(1-R./NN)
+    E3(2)= (Beta.*S.*I)./(NN) - sigma.*E +(Beta2*E*S./NN)
     E3(3)= sigma.*E - Gamma.*I
     E3(4)= Gamma.*I - varepsilon.*R.*(1-R./NN)
 endfunction
 
 S0=70*10^6;E0=2000;I0=100;R0=0
-Beta=1/2;varepsilon=1/90;sigma=1/5;Gamma=1/6
+Beta=1/2;varepsilon=1/90;sigma=1/5;Gamma=1/6;Beta2=1/5
 t0=0
 t=1:1:700
 N0=[S0;E0;I0;R0]

@@ -32,7 +32,7 @@ function pp(n0,col)
     //plot(xi,f(xi),'o')
     plot2d(x1,polinterpolation(x1, xi,f(xi)),rect=[-1.2,-0.3.2,1.3],style=col)
 endfunction
-//pp(5,2)
+pp(5,2)
 //pp(10,7)
 //pp(15,16)
 //legend("f(x)", "n=2","n=7","n=16");
@@ -47,7 +47,7 @@ function xx(n0,col)
     yyi=interp(x1,xi,f(xi),d)
     plot2d(x1,yyi,style=3,rect=[-1.2,-0.3,1.2,1.3],style=col)
 endfunction
-xx(5,2)
-xx(10,5)
-xx(15,16)
-legend("f(x)", "n=2","n=7","n=16");
+//xx(5,2)
+//xx(10,5)
+//xx(15,16)
+//legend("f(x)", "n=2","n=7","n=16");
